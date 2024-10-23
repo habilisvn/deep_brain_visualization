@@ -46,10 +46,10 @@ function App() {
         // async function to get words from the API
         (async () => {
             const res = await NodeService.getNodes();
-            const nodes = res.map((node: { id: string; label: string }) => {
+            const nodes = res.map((node: GraphNode) => {
                 return {
                     id: node.id,
-                    label: node.label
+                    label: node.label || 'Unknown'
                 };
             });
             setNodes(nodes);

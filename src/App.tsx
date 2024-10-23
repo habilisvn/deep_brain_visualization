@@ -1,7 +1,7 @@
 import Graph from './components/graphs/index';
 import { GraphEdge, GraphNode } from 'reagraph';
 import NodeService from './services/NodeService';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 function App() {
     const [nodes, setNodes] = useState<GraphNode[]>([]);
@@ -42,7 +42,7 @@ function App() {
         // }
     ];
 
-    useEffect(() => {
+    useMemo(() => {
         // async function to get words from the API
         (async () => {
             const res = await NodeService.getNodes();

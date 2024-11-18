@@ -2,7 +2,7 @@
 import { GraphNode } from 'reagraph';
 
 
-class NodeService {
+class GetNodeService {
     async getNodes(): Promise<GraphNode[]> {
         // return mock data instead of the result of api
         return [
@@ -13,4 +13,4 @@ class NodeService {
     }
 }
 
-export default new NodeService();
+export default new GetNodeService();

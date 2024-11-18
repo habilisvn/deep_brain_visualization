@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
-import LoginService from '../services/user/login'; // Import the GetUserInfoService
+import { useNavigate } from 'react-router-dom';
+import LoginService from '../services/user/LoginService'; // Import the GetUserInfoService
+import axios from 'axios';
 
 function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         // Handle login logic here
-        console.log('Logging in with', { username, password });
-
         try {
-            const userInfo = await LoginService.login(username, password);
-            console.log(userInfo);
-        } catch (error: any) {
-            console.error('Login failed:', error.message);
+            await LoginService.login(username, password);
+
+            navigate('/'); // Navigate to home page on successful login
+        } catch (error: unknown) {
+            if (axios.isAxiosError(error)) {
+                console.error('Login failed:', error.response?.data || error.message);
+            } else {
+                console.error('An unexpected error occurred:', error);
+            }
         }
     };
 
